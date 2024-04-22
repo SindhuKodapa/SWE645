@@ -2,7 +2,7 @@ pipeline{
     
     environment {
         registry = "tarungujjar/swe645-microservices"
-        registryCredential = 'dockerhub'
+        registryCredential = 'Docker'
         def dateTag = new Date().format("yyyyMMdd-HHmmss")
 	}
 agent any
