@@ -1,6 +1,6 @@
 FROM openjdk:17
 
-COPY target/surveyJar.jar surveyJar.jar
+COPY surveyJar.jar surveyJar.jar
 
 ENTRYPOINT ["java","-jar","/surveyJar.jar"]
 
