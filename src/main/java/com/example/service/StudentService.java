@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.entity.StudentSurvey;
 
+
 public interface StudentService {
     StudentSurvey saveStudentsurvey(StudentSurvey student);
     List<StudentSurvey> getAllStudentsurveys();
