@@ -21,7 +21,6 @@ agent any
         stage('Build Docker Image and Push'){
             steps{
                 script {
-                    sh 'docker login -u tarungujjar -p ${DOCKERHUB_PASS}'
                     docker.withRegistry('',registryCredential) {
                         def image = docker.build('tarungujjar/swe645-microservices:'+ dateTag, '.')
                         docker.withRegistry('',registryCredential) {
