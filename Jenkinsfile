@@ -21,7 +21,7 @@ agent any
         stage('Build Docker Image and Push'){
             steps{
                 script {
-                    sh 'sudo docker login -u tarungujjar -p swe645_Tarun'
+                    sh 'docker login -u sindhukodapa -p Sindhu_2001'
                         //docker.withRegistry('',registryCredential) {
                     sh 'docker build -t tarungujjar/survey .'
                     sh 'docker push tarungujjar/survey'
