@@ -21,7 +21,6 @@ agent any
         stage('Build Docker Image and Push'){
             steps{
                 script {
-                    sh 'chmod 666 /var/run/docker.sock'
                     sh 'docker login -u sindhukodapa -p Sindhu_2001'
                         //docker.withRegistry('',registryCredential) {
                     sh 'docker build -t tarungujjar/survey . '
