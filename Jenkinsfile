@@ -3,6 +3,7 @@ pipeline{
     environment{
         registry = "tarungujjar/swe645-microservices"
         registryCredential = 'Docker'
+        DOCKERHUB_PASS = 'swe645_Tarun'
         def dateTag = new Date().format("yyyyMMdd-HHmmss")
 	}
 agent any
@@ -22,12 +23,12 @@ agent any
             steps{
                 script {
                     sh 'docker login -u tarungujjar -p ${DOCKERHUB_PASS}'
-                    docker.withRegistry('',registryCredential) {
-                        def image = docker.build('tarungujjar/swe645-microservices:'+ dateTag, '.')
-                        docker.withRegistry('',registryCredential) {
-                            image.push()
-                        }
-                    }
+                    // docker.withRegistry('',registryCredential) {
+                    def image = docker.build('tarungujjar/swe645-microservices:'+ dateTag, '.')
+                        // docker.withRegistry('',registryCredential) {
+                    image.push()
+                        
+                    
                 }
             }
         }
