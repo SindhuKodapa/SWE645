@@ -18,24 +18,11 @@ agent any
                 }
             }
         }
-        // stage('Build Docker Image and Push'){
-        //     steps{
-        //         script {
-        //             sh 'docker login -u tarungujjar -p ${DOCKERHUB_PASS}'
-        //             // docker.withRegistry('',registryCredential) {
-        //             def image = docker.build('tarungujjar/swe645-microservices:'+ dateTag, '.')
-        //                 // docker.withRegistry('',registryCredential) {
-        //             image.push()
-                        
-                    
-        //         }
-        //     }
-        // }
         stage('Docker Build') {
             steps {
                 script {
                     docker.withRegistry('', registryCredential) {
-                        def customImage = docker.build('tarungujjar/survey:' + dateTag)
+                        def customImage = docker.build('tarungujjar/swe645-microservices:' + dateTag)
                     }
                 }
             }
@@ -46,7 +33,7 @@ agent any
                 script {
                     // sh 'echo ${BUILD_TIMESTAMP}'
                     docker.withRegistry('', registryCredential) {
-                        def image = docker.build('tarungujjar/survey:' + dateTag, '.')
+                        def image = docker.build('tarungujjar/swe645-microservices:' + dateTag, '.')
                         docker.withRegistry('', registryCredential) {
                             image.push()
                         }
