@@ -18,42 +18,17 @@ agent any
                 }
             }
         }
-        // stage('Build Docker Image and Push'){
-        //     steps{
-        //         script {
-        //             sh 'docker login -u tarungujjar -p ${DOCKERHUB_PASS}'
-        //             // docker.withRegistry('',registryCredential) {
-        //             def image = docker.build('tarungujjar/swe645-microservices:'+ dateTag, '.')
-        //                 // docker.withRegistry('',registryCredential) {
-        //             image.push()
-                        
-                    
-        //         }
-        //     }
-        // }
-        stage('Docker Build') {
-            steps {
+        stage('Build Docker Image and Push'){
+            steps{
                 script {
-                    docker.withRegistry('', registryCredential) {
-                        def customImage = docker.build('tarungujjar/survey:' + dateTag)
-                    }
+                    sh 'docker login -u tarungujjar -p swe645_Tarun'
+                        //docker.withRegistry('',registryCredential) {
+                    sh 'docker build -t tarungujjar/survey .'
+                    sh 'docker push tarungujjar/survey'
                 }
             }
         }
-        // Push to DockerHub Stage
-        stage('Push to Docker Hub') {
-            steps {
-                script {
-                    // sh 'echo ${BUILD_TIMESTAMP}'
-                    docker.withRegistry('', registryCredential) {
-                        def image = docker.build('tarungujjar/survey:' + dateTag, '.')
-                        docker.withRegistry('', registryCredential) {
-                            image.push()
-                        }
-                    }
-                }
-            }
-        }
+        
         stage('Deploying to single node in Rancher'){
             steps{
                 script {
