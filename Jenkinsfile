@@ -41,6 +41,7 @@ agent any
                 }
             }
         }
+        
         stage('Deploying to single node in Rancher'){
             steps{
                 script {
