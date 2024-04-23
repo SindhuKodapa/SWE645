@@ -1,7 +1,7 @@
 pipeline{
     
     environment{
-        registry = "tarungujjar/swe645-microservices"
+        registry = "tarungujjar/swe645-image"
         registryCredential = 'Docker'
         def dateTag = new Date().format("yyyyMMdd-HHmmss")
 	}
@@ -22,7 +22,7 @@ agent any
             steps {
                 script {
                     docker.withRegistry('', registryCredential) {
-                        def customImage = docker.build('tarungujjar/swe645-microservices:' + dateTag)
+                        def customImage = docker.build('tarungujjar/swe645-image:' + dateTag)
                     }
                 }
             }
@@ -33,7 +33,7 @@ agent any
                 script {
                     // sh 'echo ${BUILD_TIMESTAMP}'
                     docker.withRegistry('', registryCredential) {
-                        def image = docker.build('tarungujjar/swe645-microservices:' + dateTag, '.')
+                        def image = docker.build('tarungujjar/swe645-image:' + dateTag, '.')
                         docker.withRegistry('', registryCredential) {
                             image.push()
                         }
@@ -45,7 +45,7 @@ agent any
         stage('Deploying to single node in Rancher'){
             steps{
                 script {
-                    sh 'kubectl set image deployment/swe645-hw3-deployment container-0=tarungujjar/swe645-microservices:'+dateTag
+                    sh 'kubectl set image deployment/swe645-hw3-deployment container-0=tarungujjar/swe645-image:'+dateTag
                 }
             }
         }
