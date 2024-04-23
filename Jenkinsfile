@@ -21,10 +21,12 @@ agent any
         stage('Build Docker Image and Push'){
             steps{
                 script {
-                    sh 'docker login -u sindhukodapa -p Sindhu_2001'
-                        //docker.withRegistry('',registryCredential) {
-                    sh 'docker build -t tarungujjar/survey . '
-                    sh 'docker push tarungujjar/survey'
+                     docker.withRegistry('',registryCredential) {
+                        def image = docker.build('tarungujjar/swe645-microservices:'+ dateTag, '. --no-cache')
+                        docker.withRegistry('',registryCredential) {
+                            image.push()
+                        }
+                    }
                 }
             }
         }
