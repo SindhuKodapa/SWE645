@@ -19,7 +19,7 @@ public class StudentSurvey {
     private Long id;
 
     @Column(name = "student_FirstName")
-    private String studentFirstName;
+    private String studentFirstNamess;
 
     @Column(name = "student_LastName")
     private String studentLastName;
